@@ -26,17 +26,35 @@ let view = 'home', spendTab = 'tx', settleTab = 'adv', cat = 'Alles', card = 'Be
 
 /* ---------- Opstarten ---------- */
 
-function readLink() {
-  // De geheime link: …/#k=<base64url van {"u": web-app-URL, "t": token}>
-  const m = /[#&]k=([A-Za-z0-9_-]+)/.exec(location.hash);
-  if (!m) return;
+// De geheime link: …/#k=<base64url van {"u": web-app-URL, "t": token}>. Geeft de config terug, of null.
+function parseLink(text) {
+  const m = /[#&]k=([A-Za-z0-9_-]+)/.exec(String(text || ''));
+  if (!m) return null;
   try {
     const raw = JSON.parse(atob(m[1].replace(/-/g, '+').replace(/_/g, '/')));
     if (/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(raw.u) && typeof raw.t === 'string' && raw.t.length >= 24) {
-      store.set('config', { url: raw.u, token: raw.t });
+      return { url: raw.u, token: raw.t };
     }
-  } catch (e) { /* ongeldige link: negeren */ }
+  } catch (e) { /* ongeldige link */ }
+  return null;
+}
+
+function readLink() {
+  if (!/[#&]k=/.test(location.hash)) return;
+  const c = parseLink(location.hash);
+  if (c) store.set('config', c);
   history.replaceState(null, '', location.pathname + location.search);
+}
+
+// Een app op het iPhone-beginscherm heeft een eigen opslag, los van Safari: daar plak je de link één keer.
+function connectFromField() {
+  const c = parseLink($('linkIn').value.trim());
+  if (!c) { $('linkErr').textContent = 'Dit is niet de geheime link. Hij begint met https://erisaborova.github.io/kasboek/#k='; return; }
+  store.set('config', c);
+  config = c;
+  $('linkIn').value = '';
+  hide('gateLink');
+  showPin();
 }
 
 async function init() {
@@ -637,6 +655,8 @@ function bindUi() {
   });
 
   $('veil').onclick = closeSheet;
+  $('linkBtn').onclick = connectFromField;
+  $('linkIn').onkeydown = e => { if (e.key === 'Enter') connectFromField(); };
   $('whoBtn').onclick = chooseWho;
   $('setWho').onclick = chooseWho;
   $('setGoal').onclick = openGoal;

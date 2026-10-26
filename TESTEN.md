@@ -8,6 +8,8 @@ Doe dit eerst met de **testkopie** van de Sheet. Houd de Sheet op je laptop open
 - [ ] Kies "Ik ben Erisa" of "Ik ben Cas".
 - [ ] iPhone: Deel → "Zet op beginscherm". Android: menu → "App installeren".
 - [ ] Open de app vanaf het beginscherm: hij opent zonder adresbalk, met het bonnetjes-icoon.
+- [ ] iPhone: de app op het beginscherm heeft een eigen opslag, los van Safari. Plak daar één keer de
+      geheime link in het veld, tik Verbinden en voer de pincode in. Daarna onthoudt hij alles.
 
 ## Home klopt met het Dashboard
 - [ ] Erisa: over te maken **€ 895,96**. Cas: **€ 1.019,58**.

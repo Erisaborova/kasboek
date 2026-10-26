@@ -142,7 +142,13 @@
 
 <div class="gate hidden" id="gateLink">
   <h1>Kasboek</h1>
-  <p>Open de app via de geheime link die je van Erisa hebt gekregen. Daarna werkt hij ook vanaf je beginscherm.</p>
+  <p>Plak hier één keer de geheime link. Daarna onthoudt dit apparaat hem.</p>
+  <div style="width:100%;max-width:320px;text-align:left">
+    <label class="f" for="linkIn">Geheime link</label>
+    <input class="in" id="linkIn" type="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://erisaborova.github.io/kasboek/#k=…">
+    <div class="err" id="linkErr" role="alert"></div>
+    <button class="btn" id="linkBtn">Verbinden</button>
+  </div>
 </div>
 <div class="gate hidden" id="gatePin">
   <h1>Kasboek</h1>
