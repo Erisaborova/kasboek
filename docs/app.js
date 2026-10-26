@@ -435,14 +435,15 @@ function openPay() {
 function openDirect() {
   const dir = direction();
   const payee = people().find(p => p.name === dir.payee);
-  const link = `https://revolut.me/${payee.revolut}?amount=${dir.amount.toFixed(2)}&currency=EUR`;
+  // revolut.me vult het bedrag in als je het in centen meegeeft (getest op iPhone, oktober 2026).
+  const link = `https://revolut.me/${payee.revolut}?amount=${Math.round(dir.amount * 100)}&currency=EUR`;
   const iPay = dir.payer === user;
   const todo = todoFor('direct', dir.payer);
   openSheet(`<h2>${iPay ? 'Betaal ' + esc(dir.payee) : 'Betaalverzoek aan ' + esc(dir.payer)}</h2>
     <div class="copy"><div><div class="sub">Bedrag</div><div class="v num">${eur(dir.amount)}</div></div><button class="btn small" data-copy="${plainAmount(dir.amount)}">Kopieer</button></div>
     ${iPay ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Open revolut.me/${esc(payee.revolut)}</a>`
            : `<button class="btn" data-share="${esc(link)}">Deel je betaallink met ${esc(dir.payer)}</button>`}
-    <p class="hint">Neemt Revolut het bedrag niet over? Plak het dan zelf.</p>
+    <p class="hint">Het bedrag staat al ingevuld in Revolut. Controleer het voor je betaalt.</p>
     ${todo && !todo.done ? `<button class="btn ghost" data-donetodo="${todo.row}">${iPay ? 'Betaald' : 'Ontvangen'}, vink af</button>` : ''}`);
 }
 

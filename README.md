@@ -100,7 +100,7 @@ alles. Trek in de app omlaag om te verversen.
 
 ## Bekende open punten
 
-- Of `revolut.me/...?amount=…&currency=EUR` het bedrag invult, is nog niet getest op een echte iPhone.
-  De app toont het bedrag altijd ook met een kopieerknop.
+- `revolut.me/...?amount=…&currency=EUR` vult het bedrag in als het **in centen** staat (45719 = € 457,19);
+  getest op iPhone. De app toont het bedrag daarnaast met een kopieerknop.
 - Een betaling naar de gezamenlijke rekening kan niet met een vast bedrag worden gestart; de knop opent alleen Revolut.
 - Archiveren van afgeronde regels doet Claude, pas na bevestiging van Erisa. De app vinkt alleen af.

@@ -19,7 +19,7 @@ Doe dit eerst met de **testkopie** van de Sheet. Houd de Sheet op je laptop open
 ## Betalen
 - [ ] Betalen → Kopieer: het bedrag staat op het klembord.
 - [ ] Open Revolut: de Revolut-app opent (of app.revolut.com).
-- [ ] Als Cas: "Betaal Erisa" opent revolut.me/erisaborova. **Noteer of het bedrag al ingevuld is.**
+- [ ] Als Cas: "Betaal Erisa" opent revolut.me/erisaborova met het bedrag al ingevuld.
 - [ ] Als Erisa: "Stuur betaalverzoek" opent het deelmenu met de link.
 - [ ] "Overgemaakt, vink af": in Te doen staat bij die regel kolom F op Ja.
 
