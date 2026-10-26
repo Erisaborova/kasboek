@@ -1,0 +1,70 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Kasboek Erisa en Cas//NL
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Kasboek
+BEGIN:VEVENT
+UID:kasboek-declareren@kasboek
+DTSTAMP:20261026T154819Z
+DTSTART;VALUE=DATE:20261112
+DTEND;VALUE=DATE:20261113
+RRULE:FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYMONTHDAY=12,13,14;BYSETPOS=1
+SUMMARY:Kasboek: declareren op werk
+DESCRIPTION:Controleer het tabblad Declaraties en declareer wat bij stap 2 
+ nog open staat (alleen vluchten\, benzine en overnachtingen voor werk).
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kasboek: declareren op werk
+TRIGGER;RELATED=START:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:kasboek-invullen@kasboek
+DTSTAMP:20261026T154819Z
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261125
+RRULE:FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYMONTHDAY=22,23,24;BYSETPOS=-1
+SUMMARY:Kasboek: voorschotten en declaraties invullen
+DESCRIPTION:Vul in de app je voorschotten en declaraties in. De afsluitdag 
+ is de 26e\; wat later komt\, telt pas de maand erop.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kasboek: voorschotten en declaraties invullen
+TRIGGER;RELATED=START:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:kasboek-betaaldag@kasboek
+DTSTAMP:20261026T154819Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+RRULE:FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYMONTHDAY=23,24,25;BYSETPOS=-1
+SUMMARY:Kasboek: maandbijdrage overmaken
+DESCRIPTION:Betaaldag. Open de Kasboek-app en tik op Betalen voor het bedra
+ g van deze maand.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kasboek: maandbijdrage overmaken
+TRIGGER;RELATED=START:PT9H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:kasboek-wisselen@kasboek
+DTSTAMP:20261026T154819Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+RRULE:FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYMONTHDAY=25,26,27;BYSETPOS=1
+SUMMARY:Kasboek: geld wisselen naar ZAR
+DESCRIPTION:Wissel geld naar de ZAR-pocket voor boodschappen\, benzine en i
+ nternet (richtbedrag: variabele kosten + internet uit het tabblad Budget).
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kasboek: geld wisselen naar ZAR
+TRIGGER;RELATED=START:PT9H
+END:VALARM
+END:VEVENT
+END:VCALENDAR

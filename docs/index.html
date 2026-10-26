@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#E6E2DA">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kasboek">
+<title>Kasboek</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preload" href="fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div>
+      <h1 id="topH">Kasboek</h1>
+      <div class="sub" id="topS"></div>
+    </div>
+    <button class="who hidden" id="whoBtn" aria-label="Wissel van persoon"><span class="av" id="whoAv"></span><span id="whoName"></span></button>
+  </header>
+  <div class="banner hidden" id="banner" role="status"></div>
+
+  <main class="scroll" id="scroll">
+    <div class="pull" id="pull">Loslaten om te verversen</div>
+
+    <section data-v="home">
+      <div class="card">
+        <div class="card-h"><h2>Jij maakt over naar de gezamenlijke rekening</h2><span class="pill" id="payPill">Nog open</span></div>
+        <div class="lead num" id="payTotal"><span class="skel">€ 000,00</span></div>
+        <div class="sub num" id="payOther"></div>
+        <div class="lines" id="payLines"></div>
+        <button class="btn" id="payBtn">Betalen</button>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2 id="dTitle">Onderling, rechtstreeks</h2><span class="pill" id="dPill">Nog open</span></div>
+        <div class="fig num" id="dTotal"><span class="skel">€ 000,00</span></div>
+        <div class="lines" id="dLines"></div>
+        <button class="btn ghost" id="dBtn">Betaalverzoek</button>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>Per maand, samen</h2></div>
+        <div class="strip">
+          <div><div class="k">Leefkosten</div><div class="fig num" id="kLeef"></div></div>
+          <div><div class="k">Naar de buffer</div><div class="fig num" id="kBuf"></div><div class="sub num" id="kBufSplit"></div></div>
+        </div>
+        <div class="lines"><div class="line"><span>Buffer netto ingelegd sinds 1 aug.</span><span id="kNet"></span></div></div>
+        <div id="goalBox" class="hidden"><div class="track"><i id="goalBar"></i></div><div class="ends num"><span>€ 0</span><span id="goalEnd"></span></div></div>
+        <div class="sub" style="margin-top:8px">Netto ingelegd, niet de stand: de Revolut-export bevat alleen bewegingen.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>Verdeling naar rato van netto inkomen</h2></div>
+        <div class="shapes" id="shapes" aria-hidden="true"></div>
+        <div class="lines" id="splitLines"></div>
+      </div>
+      <div class="foot" id="footUser"></div>
+    </section>
+
+    <section data-v="todo" class="hidden">
+      <div class="card list" id="todoOpen"></div>
+      <div class="group-h"><h2>Klaar</h2><span class="sub" id="doneCount"></span></div>
+      <div class="card list" id="todoDone"></div>
+    </section>
+
+    <section data-v="spend" class="hidden">
+      <div class="utabs" role="tablist">
+        <button class="on" id="tabTx" role="tab">Transacties</button>
+        <button id="tabBud" role="tab">Budget en gemeten</button>
+      </div>
+      <div id="spTx">
+        <div class="filterrow">
+          <input class="search" id="q" type="search" placeholder="Zoek omschrijving" aria-label="Zoek in transacties">
+          <div class="seg" id="cardSeg"></div>
+        </div>
+        <div class="chips" id="catChips"></div>
+        <div class="card list" style="margin-top:10px" id="txList"></div>
+      </div>
+      <div id="spBud" class="hidden">
+        <div class="card" id="budList"></div>
+      </div>
+    </section>
+
+    <section data-v="settle" class="hidden">
+      <div class="utabs" role="tablist">
+        <button class="on" id="tabAdv" role="tab">Voorschotten</button>
+        <button id="tabClaim" role="tab">Declaraties</button>
+      </div>
+      <div class="summary" id="settleSum"></div>
+      <div class="card list" id="settleList"></div>
+      <div class="switch"><span>Toon afgerond</span><button class="toggle" id="showDone" aria-label="Toon afgerond" aria-pressed="false"></button></div>
+      <button class="btn" id="addBtn">+ Voorschot toevoegen</button>
+      <div class="hint" id="cutoffHint" style="text-align:center"></div>
+    </section>
+
+    <section data-v="more" class="hidden">
+      <div class="card receipt"><div class="card-h"><h2>Hoe is het berekend?</h2></div><div id="saldo"></div></div>
+      <div class="card receipt"><div class="card-h"><h2>Beleggingsrekening</h2><span class="pill wait">Alleen lezen</span></div><div id="belegging"></div></div>
+      <div class="card">
+        <div class="card-h"><h2>Herinneringen</h2></div>
+        <div class="lines">
+          <div class="line"><span>12e</span><span>Declareren op werk</span></div>
+          <div class="line"><span>24e</span><span>Voorschotten invullen</span></div>
+          <div class="line"><span>25e</span><span>Maandbijdrage overmaken</span></div>
+          <div class="line"><span>Vanaf de 25e</span><span>Wisselen naar ZAR</span></div>
+        </div>
+        <a class="btn ghost" href="Kasboek_herinneringen.ics" download>Zet in mijn agenda</a>
+      </div>
+      <div class="card">
+        <div class="card-h"><h2>Instellingen</h2></div>
+        <div class="lines">
+          <div class="line"><span>Ik ben</span><span><button class="linkish" id="setWho"></button></span></div>
+          <div class="line"><span>Doel voor de buffer</span><span><button class="linkish" id="setGoal"></button></span></div>
+          <div class="line"><span>Laatst ververst</span><span id="setFresh"></span></div>
+        </div>
+        <button class="btn ghost" id="refreshBtn">Ververs</button>
+        <button class="btn ghost" id="forgetBtn">Vergeet dit apparaat</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Hoofdmenu">
+    <button class="on" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
+    <button data-go="todo"><span class="badge num hidden" id="badge"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="16" height="16"/><path d="m8 12 3 3 5-6"/></svg>Te doen</button>
+    <button data-go="spend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Uitgaven</button>
+    <button data-go="settle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg>Verrekenen</button>
+    <button data-go="more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></svg>Meer</button>
+  </nav>
+</div>
+
+<div class="veil" id="veil"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="gate hidden" id="gateLink">
+  <h1>Kasboek</h1>
+  <p>Open de app via de geheime link die je van Erisa hebt gekregen. Daarna werkt hij ook vanaf je beginscherm.</p>
+</div>
+<div class="gate hidden" id="gatePin">
+  <h1>Kasboek</h1>
+  <p>Voer de pincode in</p>
+  <div class="pin" id="pinDots"><i></i><i></i><i></i><i></i></div>
+  <div class="err" id="pinErr" role="alert"></div>
+  <div class="pad" id="pad"></div>
+</div>
+<div class="gate hidden" id="gateWho">
+  <h1>Wie ben jij?</h1>
+  <p>Dit onthouden we op dit apparaat.</p>
+  <div class="choose" id="chooseWho"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

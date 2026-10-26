@@ -1,0 +1,8 @@
+# Lokale hulpbestanden
+.taste-skill/
+.claude/
+.DS_Store
+# Demodata met echte bedragen: nooit in de (publieke) repo
+docs/demo.json
+# Mockups bevatten bedragen uit de Sheet: niet publiek
+mockups/
