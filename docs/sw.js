@@ -1,6 +1,6 @@
 /* Kasboek · service worker. Bewaart de app zelf, zodat hij offline opent; de laatst bekende stand
    staat in localStorage. Verzoeken naar de Sheet gaan nooit via deze cache. */
-const CACHE = 'kasboek-v1';
+const CACHE = 'kasboek-v2';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
   'fonts/plex-mono-400.woff2', 'fonts/plex-mono-600.woff2',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png', 'Kasboek_herinneringen.ics'];

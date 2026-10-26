@@ -414,8 +414,7 @@ function copyText(v) {
 
 function openRevolut() {
   // Alleen de app openen; een vast bedrag invullen kan niet zonder bankkoppeling.
-  const t = setTimeout(() => { if (document.visibilityState === 'visible') location.href = 'https://app.revolut.com'; }, 1400);
-  document.addEventListener('visibilitychange', () => clearTimeout(t), { once: true });
+  // Geen automatische terugval naar de website: op iOS sprong het Kasboek zelf dan mee naar Revolut.
   location.href = 'revolut://';
 }
 
@@ -428,7 +427,8 @@ function openPay() {
     <div class="copy"><div><div class="sub">Bedrag</div><div class="v num">${esc(money(me.total.text))}</div></div><button class="btn small" data-copy="${plainAmount(amount)}">Kopieer</button></div>
     <div class="copy"><div><div class="sub">Omschrijving</div><div>${esc(desc)}</div></div><button class="btn ghost small" data-copy="${esc(desc)}">Kopieer</button></div>
     <button class="btn" data-revolut>Open Revolut</button>
-    <p class="hint">Revolut opent zonder bedrag. Plak het bedrag daar en kom terug om af te vinken.</p>
+    <p class="hint">Revolut opent zonder bedrag. Plak het bedrag daar en kom terug om af te vinken.
+      Geen Revolut-app op dit apparaat? <a href="https://app.revolut.com" target="_blank" rel="noopener noreferrer">Revolut op het web</a>.</p>
     ${todo && !todo.done ? `<button class="btn ghost" data-donetodo="${todo.row}">Overgemaakt, vink af</button>` : ''}`);
 }
 
